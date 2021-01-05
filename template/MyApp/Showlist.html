@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+{% load static %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <title>Student Data</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/app.css" />
+  </head>
+  <body>
+
+
+<nav class="navbar navbar-expand-md navbar-secondary bg-secondary">
+  <a class="navbar-brand" href="/" style="color:white;font-weight:bold"> Student Data</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon" ></span>
+  </button>
+ <ul class="navbar-nav">
+    <li class="nav-item ">
+      <a class="nav-link text-white" href="/show/">Student List</a>
+    </li>
+    </ul>
+      </nav>
+<br>
+<br>
+<br>
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<body>
+
+<div class="container-fluid bg-1 text-center">
+
+   <h1>Student List</h1></div>
+
+
+<table>
+  <tr>
+    <th>Sid</th>
+    <th>Name</th>
+    <th>Semester</th>
+    <th>Branch</th>
+     <th colspan="2">Action</th>
+  </tr>
+    {% for x in show %}
+  <tr>
+    <td>{{ x.sid }}</td>
+    <td>{{ x.name }}</td>
+    <td>{{ x.semester }}</td>
+    <td>{{ x.branch }}</td>
+    <td><form action="/edit/" method="post">
+        {% csrf_token %}<button type="submit" class="btn btn-success">Edit</button>
+         <input type="hidden" value="{{ x.sid }}" name="sid"></form></td>
+      <td> <form action="/delete/" method="post">{% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+         <input type="hidden" value="{{ x.sid }}" name="sid"></form></td>
+  </tr>
+{% endfor %}
+</table>
+
+</body>
+</html>
+
+
